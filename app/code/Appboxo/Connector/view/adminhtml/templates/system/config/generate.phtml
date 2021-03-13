@@ -1,0 +1,74 @@
+<?php 
+/**
+ *
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<div class="pp-buttons-container">
+    <p>
+        <button class="primary" id="<?php echo $block->getHtmlId() ?>" type="button">
+            <?php /* @escapeNotVerified */ echo __('Generate Token') ?>
+        </button>
+        <button id="copy_generated_token" type="button">
+            <?php /* @escapeNotVerified */ echo __('Copy Token') ?>
+        </button>
+    </p>
+</div>
+<span class="generate-msg-indicator" id="appboxo_generate_ind">
+</span>
+<script>
+    require([
+        'jquery',
+        'prototype',
+    ], function(jQuery){
+        jQuery("#copy_generated_token").on("click",function(){
+            var CopyBtn = jQuery(this);
+            var copyText = document.getElementById("appboxo_connector_general_generated_token");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+            document.execCommand("copy");
+            CopyBtn.html("Copied!");
+            setTimeout( function(){ 
+                CopyBtn.html("Copy Token");
+            }  , 3000 );
+        });
+        jQuery('#appboxo_connector_gtb').click(function () {
+            // Set isAjax to true and append form_key in the request.
+            var apiKey = jQuery("#appboxo_connector_general_api_key").val();
+            var apiEmail = jQuery("#appboxo_connector_general_api_email").val();
+            var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if(apiKey == '' || apiEmail == '' || emailRegex.test(apiEmail) == false){
+                jQuery("button#save").trigger("click");
+                return;
+            }
+            jQuery(this).html("Generating, Wait...");
+            jQuery("#appboxo_generate_ind").html("");
+            params = {
+                form_key: '<?php echo $block->getFormKey() ?>',
+                isAjax: true,
+                apiKey: apiKey,
+                apiEmail: apiEmail
+            };
+            // Make the ajax call and handel data.
+            jQuery.ajax({
+                showLoader: true, 
+                url: "<?php echo $block->getAjaxUrl() ?>", 
+                data: params,
+                dataType: 'json'
+            }).done(function (data) { 
+                //alert(data['token']); 
+                console.log(data);
+                if(data['success']){
+                    jQuery("#appboxo_connector_general_generated_token").val(data['token']);
+                    jQuery("button#save").trigger("click");
+                }else{
+                    jQuery("#appboxo_connector_general label.mage-error").hide();
+                    jQuery("#appboxo_connector_general input.mage-error").removeClass("mage-error");
+                    jQuery("#appboxo_connector_gtb").html("Generate Token");
+                    jQuery("#appboxo_generate_ind").html("<label class='mage-error'>"+ data['message']+"</label>");
+                }
+            });
+        });
+    });
+    </script>

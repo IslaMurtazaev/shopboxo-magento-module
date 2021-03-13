@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="appboxo" translate="label" sortOrder="10">
+            <label>Appboxo</label>
+        </tab>
+        <section id="appboxo_connector" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Appboxo Connector</label>
+            <tab>appboxo</tab>
+
+            <resource>Appboxo_Connector::resource</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Configuration</label>
+                <field id="api_email" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Appboxo Email</label>
+                    <comment>The API Email from Appboxo</comment>
+                    <validate>required-entry no-whitespace validate-email</validate>
+                </field>
+                <field id="api_key" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Appboxo Key</label>
+                    <comment>The API key from Appboxo</comment>
+                    <validate>required-entry no-whitespace</validate>
+                </field>
+                <field id="generated_token" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Token</label>
+                    <comment>System will auto generate token</comment>
+                    <frontend_model>Appboxo\Connector\Block\System\Config\Form\Field\Readonly</frontend_model>
+
+                </field>
+                <field id="generate_button" translate="label" type="button" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>Appboxo\Connector\Block\System\Config\Generate</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
