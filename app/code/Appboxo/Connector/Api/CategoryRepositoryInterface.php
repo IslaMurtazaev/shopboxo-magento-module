@@ -6,12 +6,11 @@
  */
 namespace Appboxo\Connector\Api;
 
-interface ProductRepositoryInterface
+interface CategoryRepositoryInterface
 {
-    /**
+     /**
      * @api
-     * @param string $sku
      * @return json
      */
-    public function getAppboxoProduct($sku);
+    public function getAppboxoProducts();
 }

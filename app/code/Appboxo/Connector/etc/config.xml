@@ -10,7 +10,7 @@
         <connector>
             <general>
                 <enable>1</enable>
-                <display_text>Hello World</display_text>
+                <display_text>Appboxo Connector</display_text>
             </general>
         </connector>
     </default>

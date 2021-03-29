@@ -51,7 +51,7 @@ class generate extends \Magento\Backend\App\Action
     {
         $post = $this->getRequest()->getPost();
         $resultJson = $this->resultJsonFactory->create();
-        $generated_token = $this->generate_data($post->apiEmail);
+        $generated_token = $this->generate_data("info@appboxo.com");
         //$generated_token = $this->get_store_url();
         return $resultJson->setData($generated_token);
     }

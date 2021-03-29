@@ -6,8 +6,26 @@
  */
 -->
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../app/code/Magento/Webapi/etc/webapi.xsd">
-    <route url="/V1/getproductimage/:sku" method="GET">
+   <!-- <route url="/V1/getproductimage/:sku" method="GET">
         <service class="Appboxo\Connector\Api\ProductRepositoryInterface" method="getProductImageUrl"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route> -->
+     <!-- <route url="/V1/appboxo/:cat/products" method="GET">
+        <service class="Appboxo\Connector\Api\CategoryRepositoryInterface" method="getAppboxoProducts"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route> -->
+    <route url="/V1/appboxo/products" method="GET">
+        <service class="Appboxo\Connector\Api\CategoryRepositoryInterface" method="getAppboxoProducts"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/appboxo/product/:sku" method="GET">
+        <service class="Appboxo\Connector\Api\ProductRepositoryInterface" method="getAppboxoProduct"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>

@@ -7,4 +7,5 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
     <preference for="Appboxo\Connector\Api\ProductRepositoryInterface" type="Appboxo\Connector\Model\ProductRepository" />
+    <preference for="Appboxo\Connector\Api\CategoryRepositoryInterface" type="Appboxo\Connector\Model\CategoryRepository" />
 </config>

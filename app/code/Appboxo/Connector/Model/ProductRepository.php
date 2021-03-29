@@ -7,66 +7,65 @@ namespace Appboxo\Connector\Model;
 use Appboxo\Connector\Api\ProductRepositoryInterface;
 
 class ProductRepository implements ProductRepositoryInterface {
-    /**
-     * @var \Magento\Store\Model\App\Emulation
-     */
-    protected $appEmulation;
-    /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $storeManager;
-    /**
-     * @var \Magento\Catalog\Api\ProductRepositoryInterface
-     */
-    protected $productRepository;
-    /**
-     * @var \Magento\Catalog\Helper\Image
-     */
-    protected $imageHelper;
-    /**
-     * @param \Magento\Store\Model\App\Emulation              $appEmulation
-     * @param \Magento\Store\Model\StoreManagerInterface      $storeManager
-     * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
-     * @param \Magento\Catalog\Helper\Image                   $imageHelper
-     */
-    public function __construct(
-       \Magento\Store\Model\App\Emulation $appEmulation,
-       \Magento\Store\Model\StoreManagerInterface $storeManager,
-       \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
-       \Magento\Catalog\Helper\Image $imageHelper
-    ) {
-       $this->appEmulation = $appEmulation;
-       $this->storeManager = $storeManager;
-       $this->productRepository = $productRepository;
-       $this->imageHelper = $imageHelper;
+  /**
+   * @var \Magento\Catalog\Api\ProductRepositoryInterface
+   */
+  protected $_productRepository;
+  /**
+   * @var \Magento\Catalog\Helper\Image
+   */
+  protected $_imageHelper;
+  /**
+   * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
+   * @param \Magento\Catalog\Helper\Image                   $imageHelper
+   */
+  public function __construct(
+     \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
+     \Magento\Catalog\Helper\Image $imageHelper
+  ) {
+     $this->_productRepository = $productRepository;
+     $this->_imageHelper = $imageHelper;
+  }
+
+  public function getAppboxoProduct($sku) {
+    $current_product = $this->_productRepository->get($sku);
+
+    if (!$current_product) {
+       $response = [
+           [
+               "code" => '301',
+               "message" => "SKU " . $productSku . " Not Found On Magento",
+           ],
+       ];
+       return $response;
+    } else {
+      $product = $current_product->getData();
+
+      $product["small_image"] = $this->_imageHelper->init($product, 'product_page_image_small')->setImageFile($product['small_image'])->getUrl();
+      $product["image"] = $this->_imageHelper->init($product, 'product_base_image')->setImageFile($product['image'])->getUrl();
+      $product["thumbnail"] = $this->_imageHelper->init($product, 'product_page_image_medium')->setImageFile($product['thumbnail'])->getUrl();
+
+      if(count($product['media_gallery']['images']) > 0 ){
+        foreach ($product['media_gallery']['images'] as $key => $img) {
+          $product['media_gallery']['images'][$key]['file'] = $this->_imageHelper->init($product, 'product_base_image')->setImageFile($img['file'])->getUrl();
+        }
+      }
+      if($product['type_id'] == 'configurable'){
+        $child_products = $current_product->getTypeInstance()->getUsedProducts($current_product);
+        if($child_products){
+          foreach ($child_products as $key => $cp) {
+            //$productDataArray['childern'][$key] = $cp->getData();
+            $product['childern'][$key]['id'] = $cp->getId();
+            $product['childern'][$key]['sku'] = $cp->getSku();
+            $product['childern'][$key]['price'] = $cp->getFinalPrice();
+            $product['childern'][$key]['special_price'] = $cp->getSalePrice();
+            $product["childern"][$key]["image"] = $this->_imageHelper->init($cp, 'product_page_image_small')->setImageFile($cp->getImage())->getUrl();
+           // $productDataArray['childern'][$key]['currency'] = $currency;
+          }
+        }
+      }
+
+      return [$product];
     }
-    public function getProductImageUrl($sku) {
-       $storeId = $this->storeManager->getStore()->getId();
-       $product = $this->productRepository->get($sku);
-       $this->appEmulation->startEnvironmentEmulation($storeId, \Magento\Framework\App\Area::AREA_FRONTEND, true);
-       if (!$product) {
-           $response = [
-               [
-                   "code" => '301',
-                   "message" => "SKU " . $productSku . " Not Found On Magento",
-               ],
-           ];
-           return $response;
-       } else {
-           $image_base_url = $this->imageHelper->init($product, 'product_base_image')->getUrl();
-           $image_small_url = $this->imageHelper->init($product, 'product_page_image_small')->getUrl();
-           $image_medium_url = $this->imageHelper->init($product, 'product_page_image_medium')->getUrl();
-           $image_large_url = $this->imageHelper->init($product, 'product_page_image_large')->getUrl();
-           $response = [
-               [
-                   "product_image_base" => $image_base_url,
-                   "product_image_small" => $image_small_url,
-                   "product_image_medium" => $image_medium_url,
-                   "product_image_full" => $image_large_url
-               ],
-           ];
-           return $response;
-       }
-       $this->appEmulation->stopEnvironmentEmulation();
-    }
+  }
 }
