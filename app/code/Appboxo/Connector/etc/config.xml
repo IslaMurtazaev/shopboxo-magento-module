@@ -13,5 +13,12 @@
                 <display_text>Appboxo Connector</display_text>
             </general>
         </connector>
+        <appboxo_connector>
+            <general>
+                <is_show_in_myaccount>1</is_show_in_myaccount>
+                <max_length></max_length>	
+				<state>1</state>				
+            </general>		
+        </appboxo_connector>
     </default>
 </config>

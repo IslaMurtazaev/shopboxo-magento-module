@@ -8,4 +8,22 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
     <preference for="Appboxo\Connector\Api\ProductRepositoryInterface" type="Appboxo\Connector\Model\ProductRepository" />
     <preference for="Appboxo\Connector\Api\CategoryRepositoryInterface" type="Appboxo\Connector\Model\CategoryRepository" />
+
+    <preference for="Appboxo\Connector\Api\Data\ConnectorInterface"
+             	type="Appboxo\Connector\Model\Data\Connector" />
+    <preference for="Appboxo\Connector\Api\ConnectorManagementInterface"
+            	type="Appboxo\Connector\Model\ConnectorManagement" />
+    <preference for="Appboxo\Connector\Api\GuestConnectorManagementInterface"
+             	type="Appboxo\Connector\Model\GuestConnectorManagement" />    
+    <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid">
+        <arguments>
+            <argument name="columns" xsi:type="array">
+                <item name="order_paymentid" 
+				      xsi:type="string">sales_order.order_paymentid</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="add_connector" type="Appboxo\Connector\Plugin\Model\Order\AddUmConnector"/>
+    </type>	
 </config>

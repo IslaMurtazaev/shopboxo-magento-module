@@ -117,13 +117,15 @@ class CategoryRepository implements CategoryRepositoryInterface {
           $child_products = $product->getTypeInstance()->getUsedProducts($product);
           if($child_products){
             foreach ($child_products as $key => $cp) {
-              //$productDataArray['childern'][$key] = $cp->getData();
-              $productDataArray['childern'][$key]['id'] = $cp->getId();
-              $productDataArray['childern'][$key]['sku'] = $cp->getSku();
-              $productDataArray['childern'][$key]['price'] = $cp->getFinalPrice();
-              $productDataArray['childern'][$key]['special_price'] = $cp->getSalePrice();
+              $current_child_product = $cp->getData();
+              //$productDataArray['childern'][$key] = $current_child_product;
+              $productDataArray['childern'][$key]['id'] = $current_child_product['entity_id'];
+              $productDataArray['childern'][$key]['name'] = $current_child_product['name'];
+              $productDataArray['childern'][$key]['sku'] = $current_child_product['sku'];
+              $productDataArray['childern'][$key]['price'] = $current_child_product['price'];
+              $productDataArray['childern'][$key]['special_price'] = (isset($current_child_product['special_price']))?$current_child_product['special_price']:null;
               $productDataArray["childern"][$key]["image"] = $this->_imageHelper->init($cp, 'product_page_image_small')->setImageFile($cp->getImage())->getUrl();
-             // $productDataArray['childern'][$key]['currency'] = $currency;
+              $productDataArray['childern'][$key]['currency'] = $currency;
             }
           }
         }

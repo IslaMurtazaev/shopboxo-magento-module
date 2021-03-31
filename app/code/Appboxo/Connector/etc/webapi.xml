@@ -30,4 +30,23 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
+    <!-- Managing checkout order paymentid -->
+    <route url="/V1/guest-carts/:cartId/set-order-paymentid" method="PUT">
+        <service class="Appboxo\Connector\Api\GuestConnectorManagementInterface" 
+                  method="saveConnector"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <!-- Managing checkout order paymentid -->
+    <route url="/V1/carts/mine/set-order-paymentid" method="PUT">
+        <service class="Appboxo\Connector\Api\ConnectorManagementInterface" 
+                 method="saveConnector"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
 </routes>

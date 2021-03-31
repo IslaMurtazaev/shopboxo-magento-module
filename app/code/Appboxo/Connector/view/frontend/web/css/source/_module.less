@@ -1,0 +1,31 @@
+._error {
+  .order-paymentid-input {
+    outline: none;
+    border: 2px solid @checkout-field-validation__border-color;
+    &:focus {
+      outline: none;
+      border: 2px solid @checkout-field-validation__border-color;
+      box-shadow: 0 0 3px @checkout-field-validation__border-color;
+    }
+  }
+}
+.um-remaining-chars {
+	display: block;
+	background-color: #f4f4f4;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 9px;
+	z-index: 1;
+	margin-top: -5px;
+	.chars-value {
+		color: #ff5501;
+		font-weight: 700;
+	}
+}
+.checkout-payment-method {
+  .payment-option._collapsible.paymentid {
+    .payment-option-content {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<!-- ko if: getDefaultPaymentIdFieldState() == 2 -->
+<div class="payment-option opc-payment-additional paymentid last">
+    <div class="payment-option-title field choice">
+        <span data-bind="i18n: 'Do you have any paymentids regarding the order?'"></span>
+    </div>
+    <div class="payment-option-content">
+        <!-- ko template: 'Appboxo_Connector/checkout/order-paymentid-form' --><!-- /ko -->
+    </div>
+</div>
+<!-- /ko -->
+	
+<!-- ko if: getDefaultPaymentIdFieldState() != 2 -->
+<div class="payment-option _collapsible opc-payment-additional um-connector paymentid last"
+	 data-bind="mageInit: {'collapsible':{'openedState': '_active', 'active': 2}}">
+    <div class="payment-option-title field choice" data-role="title">
+        <span class="action action-toggle" role="heading" aria-level="2">
+            <!-- ko i18n: 'Add Payment ID'--><!-- /ko -->
+        </span>
+    </div>
+    <div class="payment-option-content" data-role="content">	
+	 <!-- ko template: 'Appboxo_Connector/checkout/order-paymentid-form' --><!-- /ko -->			
+    </div>	
+</div>
+<!-- /ko -->

@@ -1,0 +1,16 @@
+<?php
+/**
+ * Copyright © Appboxo. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php if ($paymentid = $block->getConnector()): ?>
+    <section class="admin__page-section um-connector">
+        <div class="admin__page-section-title">
+            <span class="title"><?= $block->escapeHtml(__('Payment ID')) ?></span>
+        </div>
+        <div class="admin__page-section-content">
+            <?= nl2br($block->escapeHtml($paymentid)) ?>
+        </div>
+    </section>
+<?php endif; ?>
