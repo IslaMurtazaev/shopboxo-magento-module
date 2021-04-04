@@ -40,7 +40,7 @@ Please make sure that you have valide Appboxo Email and Appboxo Key which are re
 
 * **Irfan Ullah** - *Initial work* - [Irfanbh](https://github.com/Irfanbh)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/Appboxo/shopboxo-magento-module/contributors) who participated in this project.
 
 ## License
 
