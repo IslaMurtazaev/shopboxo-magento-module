@@ -1,0 +1,27 @@
+{
+  "name": "appboxo/connector",
+  "description": "Appboxo Connector is Magento2 mdoule to providing basic connection link between Appboxo and client's stores.",
+  "require": {},
+  "type": "magento2-module",
+  "version": "0.0.14",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "authors": [
+    {
+      "name": "Appboxo",
+      "email": "info@appboxo.com",
+      "homepage": "https://www.appboxo.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Appboxo\\Connector\\": ""
+    }
+  }
+}
