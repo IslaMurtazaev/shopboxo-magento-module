@@ -16,6 +16,6 @@
             "Appboxo\\Connector\\": ""
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
