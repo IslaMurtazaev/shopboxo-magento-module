@@ -13,7 +13,16 @@ You will Magento 2.2 or above vesrion to install this module. Make sure you have
 
 ### Installing
 
-Upload copy of app folder to your Magento2 root and run bellow commands. 
+## Composer Installation
+
+Run bellow command to install the connector via composer
+```
+composer require appboxo/connector
+```
+
+## Manual Installation
+
+Upload copy of module to app/code/Appboxo/Connector and run bellow commands. 
 
 ```
 bin/magento setup:upgrade
@@ -29,16 +38,16 @@ After installation login to your Magento admin and goto
 ```
 Stores -> Configuration -> Appboxo Connector
 ```
-Please make sure that you have valide Appboxo Email and Appboxo Key which are required for generating token. After enter email and key provided by Appboxo team click on **Generate Token** button. After success message click on **Copy Token** button and send that to Appboxo team using Email, Skype, Whatsapp or other source. 
+Login to Magento admin panel and goto to Appboxo Connector page on configuration and click on **Generate Token** button. After success message click on **Copy Token** button and send that to Appboxo team using Email, Skype, Whatsapp or other source. 
 
 
 ## Version
 
-0.0.1
+0.0.14
 
 ## Authors
 
-* **Irfan Ullah** - *Initial work* - [Irfanbh](https://github.com/Irfanbh)
+* **Irfan Ullah** - *Initial work* - [Irfan Ullah](https://github.com/Irfanbh)
 
 See also the list of [contributors](https://github.com/Appboxo/shopboxo-magento-module/contributors) who participated in this project.
 
