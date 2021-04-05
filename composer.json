@@ -6,8 +6,6 @@
     "version": "0.0.2",
     "require": {
     }, 
-    "minimum-stability": "dev",
-
     "license": [
       "OSL-3.0",
       "AFL-3.0"
@@ -18,5 +16,6 @@
             "Appboxo\\Connector\\": ""
         }
     },
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
