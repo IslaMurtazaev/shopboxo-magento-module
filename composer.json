@@ -6,7 +6,8 @@
     "require": {
         "magento/framework": ">100.0",
         "magento/module-quote": ">100.0"  
-    },    
+    }, 
+    "minimum-stability": "dev",   
     "autoload": {
         "files": [ "registration.php" ],
         "psr-4": {
