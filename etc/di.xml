@@ -26,4 +26,8 @@
     <type name="Magento\Sales\Api\OrderRepositoryInterface">
         <plugin name="add_connector" type="Appboxo\Connector\Plugin\Model\Order\AddUmConnector"/>
     </type>	
+
+    <type name="Magento\Catalog\Api\ProductRepositoryInterface">
+        <plugin name="get_product_metrics" type="Appboxo\Connector\Plugin\Model\Product\ProductGet"/>
+    </type>
 </config>

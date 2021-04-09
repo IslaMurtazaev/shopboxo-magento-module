@@ -9,4 +9,10 @@
     <extension_attributes for="Magento\Sales\Api\Data\OrderInterface">
         <attribute code="order_paymentid" type="string" />
     </extension_attributes>
+
+    <extension_attributes for="Magento\Catalog\Api\Data\ProductInterface">
+	    <attribute code="qty" type="int"/>
+	    <attribute code="appboxoimage" type="string"/>
+	    <attribute code="appboxocurrency" type="string"/>
+	</extension_attributes>
 </config>
