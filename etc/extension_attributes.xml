@@ -14,5 +14,6 @@
 	    <attribute code="qty" type="int"/>
 	    <attribute code="appboxoimage" type="string"/>
 	    <attribute code="appboxocurrency" type="string"/>
+	    <attribute code="appboxoprice" type="float"/>
 	</extension_attributes>
 </config>

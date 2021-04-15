@@ -51,8 +51,10 @@ class ProductGet{
         $currency = $this->_storeManager->getStore()->getCurrentCurrency()->getCode();
 
         $extensionattributes = $product->getExtensionAttributes();
-        $extensionattributes->setAppboxoimage($imageUrl.'catalog/product');
+        $price = $product->getPriceInfo()->getPrice('final_price')->getAmount()->getValue();
+        $extensionattributes->setAppboxoprice($price);
         $extensionattributes->setAppboxocurrency($currency);
+        $extensionattributes->setAppboxoimage($imageUrl.'catalog/product');
         $product->setExtensionAttributes($extensionattributes);
 
         return $product;
@@ -75,6 +77,8 @@ class ProductGet{
             $qty = $this->_stockItem->getStockQty($product->getId(), $product->getStore()->getWebsiteId());
             $extensionattributes = $product->getExtensionAttributes();
             $extensionattributes->setQty((int)$qty);
+            $price = $product->getPriceInfo()->getPrice('final_price')->getAmount()->getValue();
+            $extensionattributes->setAppboxoprice($price);
             $extensionattributes->setAppboxocurrency($currency);
             if($product->getImage()){
                 $extensionattributes->setAppboxoimage($this->_imageHelper->init($product, 'product_base_image')->setImageFile($product->getImage())->getUrl());
