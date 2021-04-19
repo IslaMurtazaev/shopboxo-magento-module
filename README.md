@@ -43,7 +43,7 @@ Login to Magento admin panel and goto to Appboxo Connector page on configuration
 
 ## Version
 
-0.0.2
+1.0.3
 
 ## Authors
 
