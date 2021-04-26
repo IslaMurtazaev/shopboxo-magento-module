@@ -1,29 +1,42 @@
 # Appboxo Connector
 
-Appboxo Connector is Magento2 mdoule to providing basic connection link between Appboxo and client's stores. 
+Appboxo Connector is a Magento 2 module providing a more sophisticated integration between Appboxo and a client's store.
 
-## Getting Started
+## Features
 
-For current test stage it will install by simply upload the app folder to your Magento2 root. and run Magento upgrad and deploy commands.
+* Creates **Appboxo Connector** integration with these permissions:
+```
+Sales → Operations → Orders → Actions → Create
+Sales → Operations → Orders → Actions → View
+Sales → Operations → Orders → Actions → Reorder
+Sales → Operations → Orders → Actions → Edit
+Sales → Operations → Orders → Actions → Cancel
+Sales → Operations → Orders → Actions → Accept or Deny Payment
+Sales → Operations → Orders → Actions → Capture
+Sales → Operations → Orders → Actions → Invoice
+Sales → Operations → Orders → Actions → Comment
+Catalog → Inventory → Products
+Catalog → Inventory → Categories
+Customers → All customers
+Carts → Manage carts
+Stores → Settings → Configuration → Inventory section
+```
+* Extends built-in REST API for fetching products with custom fields
 
-### Prerequisites
 
-You will Magento 2.2 or above vesrion to install this module. Make sure you have access to terminal for executing various Magento commands. 
+## Prerequisites
 
+The module supports Magento 2.2 or above versions. Make sure you have access to the terminal for executing various Magento commands.
 
-### Installing
+## Installation
 
-## Composer Installation
-
-Run bellow command to install the connector via composer
+Run the below command to install the connector via composer
 ```
 composer require appboxo/connector
 ```
 
-## Manual Installation
 
-Upload copy of module to app/code/Appboxo/Connector and run bellow commands. 
-
+After installation please run these commands for the module to start working
 ```
 bin/magento setup:upgrade
 bin/magento setup:di:compile
@@ -32,14 +45,12 @@ bin/magento c:c
 ```
 
 
-## Running the tests
+## Setup integration
 
-After installation login to your Magento admin and goto 
-```
-Stores -> Configuration -> Appboxo Connector
-```
-Login to Magento admin panel and goto to Appboxo Connector page on configuration and click on **Generate Token** button. After success message click on **Copy Token** button and send that to Appboxo team using Email, Skype, Whatsapp or other source. 
-
+1. Login to Magento admin panel
+2. Go to Appboxo Connector page `Stores -> Configuration -> Appboxo Connector`
+3. Click on **Generate Token** button
+4. Click on **Copy Token** and paste it in your integration settings in [Shopboxo dashboard](https://shop.appboxo.com/integration)
 
 ## Version
 
@@ -47,14 +58,11 @@ Login to Magento admin panel and goto to Appboxo Connector page on configuration
 
 ## Authors
 
-* **Irfan Ullah** - *Initial work* - [Irfan Ullah](https://github.com/Irfanbh)
-
-See also the list of [contributors](https://github.com/Appboxo/shopboxo-magento-module/contributors) who participated in this project.
+* *Initial work* - [Irfan Ullah](https://github.com/Irfanbh)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Support
-Incase of any issue please contact with Appboxo Team. 
-Thanks
+In case of any issues, please contact [Appboxo Team](mailto:support@appboxo.com?subject=[Appboxo%20Connector%20issue]).
