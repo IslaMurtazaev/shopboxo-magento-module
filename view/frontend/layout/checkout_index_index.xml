@@ -38,7 +38,7 @@
                                                                 </item>
                                                             </item>
                                                         </item>
-                                                        <item name="payments-list" xsi:type="array">
+                                                       <!--  <item name="payments-list" xsi:type="array">
                                                             <item name="children" xsi:type="array">
                                                                 <item name="before-place-order" xsi:type="array">
                                                                     <item name="children" xsi:type="array">
@@ -48,7 +48,7 @@
                                                                     </item>
                                                                 </item>
                                                             </item>
-                                                        </item>
+                                                        </item> -->
                                                     </item>
                                                 </item>
                                             </item>
