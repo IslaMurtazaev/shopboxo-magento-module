@@ -11,4 +11,8 @@
         <observer name="appboxo_connector-add_connector_to_order" 
 		          instance="Appboxo\Connector\Observer\AddConnectorToOrder" />
     </event>
+
+    <event name="sales_quote_load_after">
+        <observer name="appboxo_connector_sales_quote_load_after" instance="Appboxo\Connector\Observer\ProductInterface" />
+    </event>
 </config>

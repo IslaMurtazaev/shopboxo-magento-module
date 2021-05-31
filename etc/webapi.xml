@@ -6,18 +6,6 @@
  */
 -->
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../app/code/Magento/Webapi/etc/webapi.xsd">
-   <!-- <route url="/V1/getproductimage/:sku" method="GET">
-        <service class="Appboxo\Connector\Api\ProductRepositoryInterface" method="getProductImageUrl"/>
-        <resources>
-            <resource ref="anonymous"/>
-        </resources>
-    </route> -->
-     <!-- <route url="/V1/appboxo/:cat/products" method="GET">
-        <service class="Appboxo\Connector\Api\CategoryRepositoryInterface" method="getAppboxoProducts"/>
-        <resources>
-            <resource ref="anonymous"/>
-        </resources>
-    </route> -->
     <route url="/V1/appboxo/products" method="GET">
         <service class="Appboxo\Connector\Api\CategoryRepositoryInterface" method="getAppboxoProducts"/>
         <resources>
@@ -39,7 +27,7 @@
         </resources>
     </route>
     <!-- Managing checkout order paymentid -->
-    <route url="/V1/carts/mine/set-order-paymentid" method="PUT">
+    <!-- <route url="/V1/carts/mine/set-order-paymentid" method="PUT">
         <service class="Appboxo\Connector\Api\ConnectorManagementInterface" 
                  method="saveConnector"/>
         <resources>
@@ -48,5 +36,12 @@
         <data>
             <parameter name="cartId" force="true">%cart_id%</parameter>
         </data>
+    </route> -->
+    <route url="/V1/carts/:cartId/set-order-paymentid" method="PUT">
+        <service class="Appboxo\Connector\Api\ConnectorManagementInterface" 
+                 method="saveConnector"/>
+        <resources>
+            <resource ref="Magento_Cart::manage" />
+        </resources>
     </route>
 </routes>

@@ -70,13 +70,13 @@ class ConnectorManagement implements ConnectorManagementInterface
 
         $this->validatePaymentId($paymentid);
         if($paymentid == null){
-            $paymentid = $this->request->getParams()['orderPaymentid'];
+            $paymentid = $this->request->getParams()['orderPaymentId'];
         } 
         
         try {
              $quote->setData(Connector::COMMENT_FIELD_NAME, strip_tags($paymentid));
             
-             $this->quoteRepository->save($quote);
+             $quote->save();
         } catch (\Exception $e) {
                throw new CouldNotSaveException(
                    __('The order paymentid could not be saved')
