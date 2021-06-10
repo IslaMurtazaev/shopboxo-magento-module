@@ -40,7 +40,7 @@ class ConnectorManagement implements ConnectorManagementInterface
     public function __construct(
         CartRepositoryInterface $quoteRepository,
         ScopeConfigInterface $scopeConfig,
-        RequestInterface $request
+        //RequestInterface $request
     ) {
         $this->quoteRepository = $quoteRepository;
         $this->scopeConfig = $scopeConfig;
