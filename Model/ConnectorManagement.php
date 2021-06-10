@@ -14,7 +14,7 @@ use Appboxo\Connector\Api\Data\ConnectorInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\ValidatorException;
 use Magento\Store\Model\ScopeInterface;
-use \Magento\Framework\App\RequestInterface;
+//use \Magento\Framework\App\RequestInterface;
 
 class ConnectorManagement implements ConnectorManagementInterface
 {
@@ -31,7 +31,7 @@ class ConnectorManagement implements ConnectorManagementInterface
     /**
      * @var request
      */
-    protected $request;
+    //protected $request;
     
     /**
      * @param CartRepositoryInterface $quoteRepository
@@ -44,7 +44,7 @@ class ConnectorManagement implements ConnectorManagementInterface
     ) {
         $this->quoteRepository = $quoteRepository;
         $this->scopeConfig = $scopeConfig;
-        $this->request = $request;
+        //$this->request = $request;
     }
 
     /**
@@ -70,7 +70,9 @@ class ConnectorManagement implements ConnectorManagementInterface
 
         $this->validatePaymentId($paymentid);
         if($paymentid == null){
-            $paymentid = $this->request->getParams()['orderPaymentId'];
+            //$paymentid = $this->request->getParams()['orderPaymentId'];
+            $paymentid_request = json_decode(file_get_contents('php://input'),true);
+            $paymentid = $paymentid_request['orderPaymentId'];
         } 
         
         try {
