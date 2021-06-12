@@ -20,4 +20,9 @@
 	<extension_attributes for="Magento\Quote\Api\Data\CartItemInterface">
 		<attribute code="appboxo_image_url" type="string" />
 	</extension_attributes>
+
+	<extension_attributes for="Magento\Quote\Api\Data\TotalsItemInterface">
+      <attribute code="appboxo_image" type="string" />
+    </extension_attributes>
+
 </config>

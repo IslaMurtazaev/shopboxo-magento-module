@@ -30,4 +30,8 @@
     <type name="Magento\Catalog\Api\ProductRepositoryInterface">
         <plugin name="get_product_metrics" type="Appboxo\Connector\Plugin\Model\Product\ProductGet"/>
     </type>
+
+    <type name="Magento\Quote\Api\CartTotalRepositoryInterface">
+        <plugin name="total_cart_repository_plugin" type="Appboxo\Connector\Plugin\Model\Cart\TotalRepositoryPlugin"/>
+    </type>
 </config>
