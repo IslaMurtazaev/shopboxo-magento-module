@@ -23,6 +23,7 @@
 
 	<extension_attributes for="Magento\Quote\Api\Data\TotalsItemInterface">
       <attribute code="appboxo_image" type="string" />
+      <attribute code="appboxo_sku" type="string" />
     </extension_attributes>
 
 </config>

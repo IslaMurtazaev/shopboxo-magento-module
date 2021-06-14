@@ -34,6 +34,7 @@ class TotalRepositoryPlugin
 
     /**
      * add sku in total cart items
+     * add product image in total cart items
      *
      * @param  \Magento\Quote\Api\CartTotalRepositoryInterface $subject
      * @param  \Magento\Quote\Api\Data\TotalsInterface $totals
@@ -54,6 +55,7 @@ class TotalRepositoryPlugin
 
             $imageurl =$this->productImageHelper->create()->init($product, 'product_thumbnail_image')->setImageFile($product->getThumbnail())->getUrl();
             $extensionAttributes->setAppboxoImage($imageurl);
+            $extensionAttributes->setAppboxoSku($product->getSku());
             $item->setExtensionAttributes($extensionAttributes);
         }
 
