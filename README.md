@@ -1,6 +1,6 @@
 # Appboxo Connector
 
-Appboxo Connector is a Magento 2 module providing a more sophisticated integration between Appboxo and a client's store.
+Appboxo Connector is a Magento 2 module providing a more sophisticated integration with Shopboxo
 
 ## Features
 
@@ -21,12 +21,11 @@ Customers → All customers
 Carts → Manage carts
 Stores → Settings → Configuration → Inventory section
 ```
-* Extends built-in REST API for fetching products with custom fields
-
+* Extends built-in REST API for fetching products and managing carts
 
 ## Prerequisites
 
-The module supports Magento 2.2 or above versions. Make sure you have access to the terminal for executing various Magento commands.
+The module supports Magento 2.2 or above versions. Make sure you have access to the terminal for executing Magento commands.
 
 ## Installation
 
@@ -34,7 +33,6 @@ Run the below command to install the connector via composer
 ```
 composer require appboxo/connector
 ```
-
 
 After installation please run these commands for the module to start working
 ```
@@ -44,17 +42,12 @@ bin/magento setup:static-content:deploy
 bin/magento c:c
 ```
 
-
 ## Setup integration
 
 1. Login to Magento admin panel
 2. Go to Appboxo Connector page `Stores -> Configuration -> Appboxo Connector`
 3. Click on **Generate Token** button
 4. Click on **Copy Token** and paste it in your integration settings in [Shopboxo dashboard](https://shop.appboxo.com/integration)
-
-## Version
-
-1.0.3
 
 ## Authors
 
@@ -65,4 +58,4 @@ bin/magento c:c
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Support
-In case of any issues, please contact [Appboxo Team](mailto:support@appboxo.com?subject=[Appboxo%20Connector%20issue]).
+In case of any issues, please contact [Appboxo Team](mailto:support@appboxo.com?subject=[Appboxo%20Connector%20issue])
