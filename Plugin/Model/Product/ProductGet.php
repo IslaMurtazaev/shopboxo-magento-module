@@ -81,7 +81,7 @@ class ProductGet{
             $extensionattributes->setAppboxoprice($price);
             $extensionattributes->setAppboxocurrency($currency);
             if($product->getImage()){
-                $extensionattributes->setAppboxoimage($this->_imageHelper->init($product, 'product_base_image')->setImageFile($product->getImage())->getUrl());
+                $extensionattributes->setAppboxoimage($this->_imageHelper->init($product, 'product_thumbnail_image')->setImageFile($product->getImage())->getUrl());
             }
             $product->setExtensionAttributes($extensionattributes);
         }
