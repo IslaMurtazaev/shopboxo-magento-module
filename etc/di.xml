@@ -10,22 +10,25 @@
     <preference for="Appboxo\Connector\Api\CategoryRepositoryInterface" type="Appboxo\Connector\Model\CategoryRepository" />
 
     <preference for="Appboxo\Connector\Api\Data\ConnectorInterface"
-             	type="Appboxo\Connector\Model\Data\Connector" />
+                type="Appboxo\Connector\Model\Data\Connector" />
     <preference for="Appboxo\Connector\Api\ConnectorManagementInterface"
-            	type="Appboxo\Connector\Model\ConnectorManagement" />
+                type="Appboxo\Connector\Model\ConnectorManagement" />
     <preference for="Appboxo\Connector\Api\GuestConnectorManagementInterface"
-             	type="Appboxo\Connector\Model\GuestConnectorManagement" />    
+                type="Appboxo\Connector\Model\GuestConnectorManagement" />    
+
+    <preference for="Magento\ConfigurableProduct\Model\LinkManagement" type="Appboxo\Connector\Plugin\Model\Product\ProductGet" />
+
     <virtualType name="Magento\Sales\Model\ResourceModel\Order\Grid">
         <arguments>
             <argument name="columns" xsi:type="array">
                 <item name="order_paymentid" 
-				      xsi:type="string">sales_order.order_paymentid</item>
+                      xsi:type="string">sales_order.order_paymentid</item>
             </argument>
         </arguments>
     </virtualType>
     <type name="Magento\Sales\Api\OrderRepositoryInterface">
         <plugin name="add_connector" type="Appboxo\Connector\Plugin\Model\Order\AddUmConnector"/>
-    </type>	
+    </type> 
 
     <type name="Magento\Catalog\Api\ProductRepositoryInterface">
         <plugin name="get_product_metrics" type="Appboxo\Connector\Plugin\Model\Product\ProductGet"/>
