@@ -61,6 +61,8 @@ class CategoryRepository implements CategoryRepositoryInterface {
 
       $name = ($this->_request->getParam('name'))? $this->_request->getParam('name') : "";
 
+      $is_special_price = ($this->_request->getParam('sale_price'))? $this->_request->getParam('sale_price') : "";
+
       $style = ($this->_request->getParam('style'))? $this->_request->getParam('style') : "";
 
       $cat = ($this->_request->getParam('category'))? $this->_request->getParam('category') : 0;
@@ -95,6 +97,15 @@ class CategoryRepository implements CategoryRepositoryInterface {
         ]);*/
         $collection->addAttributeToFilter('style_bags',array('finset'=>$style));
         //$collection->addAttributeToFilter('vendor', array('eq' => $bodyStyle));
+      }
+
+      if($is_special_price != ''){
+        $collection->addAttributeToFilter('special_price', ['neq' => '']);
+        $collection->addAttributeToFilter('price', ['neq' => '']);
+
+        $collection->getSelect()->where(
+            'at_special_price.value < at_price.value'
+        );
       }
  
       $collection->setPageSize($pageSize); 
