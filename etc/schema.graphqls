@@ -1,0 +1,3 @@
+interface ProductInterface {
+    appboxo_qty : String @resolver(class: "Appboxo\\Connector\\Model\\Resolver\\Product\\StockStatus") @doc(description: "Stock status label") 
+}
