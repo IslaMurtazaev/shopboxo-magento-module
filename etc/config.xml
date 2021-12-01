@@ -22,11 +22,11 @@
         </appboxo_connector>
         <payment>
             <miniapppayment>
-                <payment_action>authorize_capture</payment_action>
                 <model>Appboxo\Connector\Model\PaymentMethod</model>
                 <active>1</active>
                 <title>Miniapp Payment</title>
                 <order_status>pending</order_status>
+                <allowspecific>0</allowspecific>
             </miniapppayment>
         </payment>
     </default>

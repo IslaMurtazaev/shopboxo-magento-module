@@ -14,6 +14,8 @@ use Appboxo\Connector\Api\Data\ConnectorInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\ValidatorException;
 use Magento\Store\Model\ScopeInterface;
+use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\Sales\Model\ResourceModel\Order;
 //use \Magento\Framework\App\RequestInterface;
 
 class ConnectorManagement implements ConnectorManagementInterface
@@ -33,17 +35,28 @@ class ConnectorManagement implements ConnectorManagementInterface
      */
     //protected $request;
     
+    /** @var OrderInterface */
+    protected $orderResourceModel;
+
+
+    /** @var OrderRepository */
+    protected $orderRepository;
+
     /**
      * @param CartRepositoryInterface $quoteRepository
      * @param ScopeConfigInterface $scopeConfig
      */
     public function __construct(
         CartRepositoryInterface $quoteRepository,
+        Order $orderResourceModel,
+        OrderRepositoryInterface $orderRepository,
         ScopeConfigInterface $scopeConfig
         //RequestInterface $request
     ) {
         $this->quoteRepository = $quoteRepository;
         $this->scopeConfig = $scopeConfig;
+        $this->orderResourceModel = $orderResourceModel;
+        $this->orderRepository = $orderRepository;
         //$this->request = $request;
     }
 
@@ -86,6 +99,40 @@ class ConnectorManagement implements ConnectorManagementInterface
         }
 
          return $paymentid;
+    }
+
+
+    public function saveOderComment(
+        $orderId,
+        ConnectorInterface $orderPaymentId
+    ) {
+
+        try {
+            $order = $this->orderRepository->get($orderId);
+        } catch (\Exception $e) {
+            throw new CouldNotSaveException(
+                __("Please enter a valid order ID")
+            );
+        }
+
+        $paymentid_order = $orderPaymentId->getPaymentId();
+
+        $this->validatePaymentId($paymentid_order);
+        if($paymentid_order == null){
+            $paymentid_request = json_decode(file_get_contents('php://input'),true);
+            $paymentid_order = $paymentid_request['orderPaymentId'];
+        } 
+
+        try {
+            $order->setOrderPaymentid($paymentid_order);
+            $this->orderResourceModel->save($order);
+
+        } catch (\Exception $e) {
+            throw new CouldNotSaveException(
+                __("The order ID could not be saved")
+            );
+        }
+        return $paymentid_order;
     }
 
     /**

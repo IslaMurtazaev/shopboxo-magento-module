@@ -44,4 +44,12 @@
             <resource ref="Magento_Cart::manage" />
         </resources>
     </route>
+    <route url="/V1/orders/:orderId/set-order-paymentid" method="PUT">
+        <service class="Appboxo\Connector\Api\ConnectorManagementInterface" 
+                 method="saveOderComment"/>
+        <resources>
+            <resource ref="Magento_Sales::comment" />
+            <resource ref="Magento_Sales::actions_view" />
+        </resources>
+    </route>
 </routes>
