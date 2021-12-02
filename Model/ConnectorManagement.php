@@ -102,7 +102,7 @@ class ConnectorManagement implements ConnectorManagementInterface
     }
 
 
-    public function saveOderComment(
+    public function saveOrderComment(
         $orderId,
         ConnectorInterface $orderPaymentId
     ) {

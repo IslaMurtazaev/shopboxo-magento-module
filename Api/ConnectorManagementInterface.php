@@ -23,4 +23,14 @@ interface ConnectorManagementInterface
         $cartId,
         ConnectorInterface $orderPaymentId
     );
+
+    /**
+     * @param int $cartId
+     * @param ConnectorInterface $orderPaymentId
+     * @return string
+     */
+    public function saveOrderComment(
+        $orderId,
+        ConnectorInterface $orderPaymentId
+    );
 }

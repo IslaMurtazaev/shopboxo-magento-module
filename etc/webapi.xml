@@ -46,7 +46,7 @@
     </route>
     <route url="/V1/orders/:orderId/set-order-paymentid" method="PUT">
         <service class="Appboxo\Connector\Api\ConnectorManagementInterface" 
-                 method="saveOderComment"/>
+                 method="saveOrderComment"/>
         <resources>
             <resource ref="Magento_Sales::comment" />
             <resource ref="Magento_Sales::actions_view" />
