@@ -9,32 +9,45 @@ use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\DB\Ddl\Table;
-use Magento\Sales\Setup\SalesSetupFactory;
-use Magento\Quote\Setup\QuoteSetupFactory;
+use Magento\Store\Model\StoreFactory;
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\Framework\Event\ManagerInterface;
+use Magento\Store\Model\ResourceModel\Store;
 
 class InstallData implements InstallDataInterface
 {
     /**
-     * @var SalesSetupFactory
+     * @var StoreFactory
      */
-    protected $salesSetupFactory;
-    
+    protected $_storeFactory;
     /**
-     * @var QuoteSetupFactory
+     * @var StoreManagerInterface
      */
-    protected $quoteSetupFactory;
+    protected $_storeManager;
+    /**
+     * @var ManagerInterface
+     */
+    protected $_eventManager;
+    /**
+     * @var Store
+     */
+    protected $_storeResourceModel;
 
     /**
      * InstallData constructor.
-     * @param SalesSetupFactory $salesSetupFactory
-     * @param QuoteSetupFactory $quoteSetupFactory
+     * @param StoreFactory $storeFactory
+     * @param StoreManagerInterface $storeManager
      */
     public function __construct(
-        SalesSetupFactory $salesSetupFactory,
-        QuoteSetupFactory $quoteSetupFactory
+        StoreFactory $storeFactory,
+        StoreManagerInterface $storeManager,
+        ManagerInterface $eventManager,
+        Store $storeResourceModel
     ) {
-        $this->salesSetupFactory = $salesSetupFactory;
-        $this->quoteSetupFactory = $quoteSetupFactory;
+        $this->_storeFactory = $storeFactory;
+        $this->_storeManager = $storeManager;
+        $this->_eventManager = $eventManager;
+        $this->_storeResourceModel = $storeResourceModel;
     }
 
     /**
@@ -90,35 +103,25 @@ class InstallData implements InstallDataInterface
                 ]
             );
 
-
-        /** @var \Magento\Quote\Setup\QuoteSetup $quoteInstaller */
-        /*$quoteInstaller = $this->quoteSetupFactory->create(
-            ['resourceName' => 'quote_setup', 'setup' => $setup]
-        );*/
-
-        /** @var \Magento\Sales\Setup\SalesSetup $salesInstaller */
-        /*$salesInstaller = $this->salesSetupFactory->create(
-            ['resourceName' => 'sales_setup', 'setup' => $setup]
-        );
-        
-        $quoteInstaller->addAttribute(
-            'quote',
-            'order_paymentid',
-            [
-              'type' => Table::TYPE_TEXT,
-              'length' => 300, 'nullable' => true
-            ]
-        );
-
-        $salesInstaller->addAttribute(
-            'order',
-            'order_paymentid',
-            [
-              'type' => Table::TYPE_TEXT,
-              'length' => 300, 'nullable' => true,
-              'grid' => true
-            ]
-        );*/
+        $store = $this->_storeFactory->create();
+        $store->load('mp_storeview');
+        if (!$store->getId()) {
+            $store->setCode('mp_storeview');
+            $store->setName(' MP Store View');
+            $store->setWebsiteId($this->_storeManager->getDefaultStoreView()->getWebsiteId());
+            $store->setGroupId($this->_storeManager->getDefaultStoreView()->getGroupId());
+            $store->setData('is_active', '1');
+            $store->setSortOrder(0);
+            try {
+                $this->_storeResourceModel->save($store);
+            } catch (\Exception $e) {
+                echo $e->getMessage();                    
+                if (!$store->getId()) {
+                    return;
+                }
+            }
+            $this->_eventManager->dispatch('store_add', ['store' => $store]);
+        }
 
         $setup->endSetup();
     }
